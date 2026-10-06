@@ -12,127 +12,382 @@
 --good:#16855b;--danger:#d94b5b;
 --shadow:0 10px 30px rgba(20,30,50,.07)
 }
+
 *{box-sizing:border-box}
+
 body{
-margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-background:var(--bg);color:var(--text)
-}
-button,input,select{font:inherit}
-.app{max-width:1100px;margin:auto;padding:18px}
-.top{
-display:flex;justify-content:space-between;align-items:center;
-gap:12px;margin-bottom:18px
-}
-.brand h1{margin:0;font-size:25px}
-.brand p{margin:4px 0;color:var(--muted);font-size:13px}
-.btn{
-border:0;border-radius:12px;padding:11px 15px;
-cursor:pointer;font-weight:700
-}
-.primary{background:var(--accent);color:white}
-.ghost{
-background:var(--card);border:1px solid var(--line);
+margin:0;
+font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+background:var(--bg);
 color:var(--text)
 }
+
+button,input,select{font:inherit}
+
+.app{
+max-width:1100px;
+margin:auto;
+padding:18px
+}
+
+.top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:12px;
+margin-bottom:18px
+}
+
+.brand h1{
+margin:0;
+font-size:25px
+}
+
+.brand p{
+margin:4px 0;
+color:var(--muted);
+font-size:13px
+}
+
+.btn{
+border:0;
+border-radius:12px;
+padding:11px 15px;
+cursor:pointer;
+font-weight:700
+}
+
+.primary{
+background:var(--accent);
+color:white
+}
+
+.ghost{
+background:var(--card);
+border:1px solid var(--line);
+color:var(--text)
+}
+
 .stats{
-display:grid;grid-template-columns:repeat(4,1fr);gap:12px
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px
 }
+
 .card{
-background:var(--card);border:1px solid var(--line);
-border-radius:17px;padding:17px;box-shadow:var(--shadow)
+background:var(--card);
+border:1px solid var(--line);
+border-radius:17px;
+padding:17px;
+box-shadow:var(--shadow)
 }
-.stat small{color:var(--muted)}
-.stat strong{display:block;font-size:24px;margin-top:7px}
+
+.stat small{
+color:var(--muted)
+}
+
+.stat strong{
+display:block;
+font-size:24px;
+margin-top:7px
+}
+
 .grid{
-display:grid;grid-template-columns:1.35fr .85fr;
-gap:14px;margin-top:14px
+display:grid;
+grid-template-columns:1.35fr .85fr;
+gap:14px;
+margin-top:14px
 }
+
 .section-title{
-display:flex;justify-content:space-between;
-align-items:center;margin-bottom:12px
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:12px;
+gap:10px
 }
-.section-title h2{font-size:17px;margin:0}
+
+.section-title h2{
+font-size:17px;
+margin:0
+}
+
 .month input{
-border:1px solid var(--line);padding:9px;border-radius:10px
+border:1px solid var(--line);
+padding:9px;
+border-radius:10px
 }
+
 .bars{
-height:230px;display:flex;align-items:end;gap:7px;
-padding:12px 4px 2px
+height:230px;
+display:flex;
+align-items:end;
+gap:7px;
+padding:12px 4px 2px;
+overflow-x:auto
 }
+
 .barwrap{
-flex:1;height:100%;display:flex;flex-direction:column;
-justify-content:end;align-items:center;gap:5px
+flex:1;
+min-width:12px;
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:end;
+align-items:center;
+gap:5px
 }
+
 .bar{
-width:100%;max-width:30px;border-radius:7px 7px 2px 2px;
+width:100%;
+max-width:30px;
+border-radius:7px 7px 2px 2px;
 background:linear-gradient(180deg,var(--accent2),var(--accent));
 min-height:3px
 }
-.barwrap span{font-size:10px;color:var(--muted)}
+
+.barwrap span{
+font-size:10px;
+color:var(--muted)
+}
+
 .cat{
-display:flex;align-items:center;justify-content:space-between;
-padding:10px 0;border-bottom:1px solid var(--line)
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:10px 0;
+border-bottom:1px solid var(--line)
 }
-.cat:last-child{border:0}
-.catname{display:flex;gap:8px;align-items:center}
+
+.cat:last-child{
+border:0
+}
+
+.catname{
+display:flex;
+gap:8px;
+align-items:center
+}
+
 .formgrid{
-display:grid;grid-template-columns:1fr 1fr;gap:10px
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
 }
+
 .field{
-display:flex;flex-direction:column;gap:5px
+display:flex;
+flex-direction:column;
+gap:5px
 }
-.field.full{grid-column:1/-1}
-.field label{font-size:12px;color:var(--muted)}
-.field input,.field select{
-padding:11px;border:1px solid var(--line);
-border-radius:11px;background:white
+
+.field.full{
+grid-column:1/-1
 }
-.actions{display:flex;gap:8px;margin-top:10px}
-.expenses{margin-top:14px}
+
+.field label{
+font-size:12px;
+color:var(--muted)
+}
+
+.field input,
+.field select{
+padding:11px;
+border:1px solid var(--line);
+border-radius:11px;
+background:white
+}
+
+.actions{
+display:flex;
+gap:8px;
+margin-top:10px;
+flex-wrap:wrap
+}
+
+.expenses{
+margin-top:14px
+}
+
 .row{
 display:grid;
 grid-template-columns:1.1fr .8fr .7fr auto;
-gap:10px;align-items:center;
-padding:12px 0;border-bottom:1px solid var(--line);
+gap:10px;
+align-items:center;
+padding:12px 0;
+border-bottom:1px solid var(--line);
 font-size:14px
 }
-.row:last-child{border:0}
+
+.row:last-child{
+border:0
+}
+
 .pill{
-font-size:11px;padding:5px 8px;border-radius:20px;
-background:#f0efff;color:#4d4db7;width:max-content
+font-size:11px;
+padding:5px 8px;
+border-radius:20px;
+background:#f0efff;
+color:#4d4db7;
+width:max-content
 }
+
 .delete{
-border:0;background:#fff0f2;color:var(--danger);
-border-radius:9px;padding:7px 9px;cursor:pointer
+border:0;
+background:#fff0f2;
+color:var(--danger);
+border-radius:9px;
+padding:7px 9px;
+cursor:pointer
 }
-.empty{text-align:center;color:var(--muted);padding:25px}
+
+.empty{
+text-align:center;
+color:var(--muted);
+padding:25px
+}
+
 .budgetline{
-height:10px;background:#edf0f5;border-radius:20px;
-overflow:hidden;margin:10px 0
+height:10px;
+background:#edf0f5;
+border-radius:20px;
+overflow:hidden;
+margin:10px 0
 }
+
 .budgetfill{
 height:100%;
 background:linear-gradient(90deg,var(--accent),var(--accent2));
 border-radius:20px
 }
-.muted{color:var(--muted);font-size:12px}
+
+.muted{
+color:var(--muted);
+font-size:12px
+}
+
+.history-card{
+margin-top:14px
+}
+
+.share-box{
+display:none;
+margin-top:14px;
+padding:15px;
+border:1px solid var(--line);
+border-radius:14px;
+background:#fafaff
+}
+
+.share-box.show{
+display:block
+}
+
+.share-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
+}
+
+.share-actions{
+display:flex;
+gap:8px;
+margin-top:10px;
+flex-wrap:wrap
+}
+
+.history-date{
+font-weight:800;
+font-size:15px;
+padding:12px 0 6px;
+border-bottom:1px solid var(--line)
+}
+
+.history-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+padding:10px 0;
+border-bottom:1px solid var(--line)
+}
+
+.history-item:last-child{
+border-bottom:0
+}
+
+.history-left{
+display:flex;
+flex-direction:column;
+gap:3px
+}
+
+.history-right{
+display:flex;
+align-items:center;
+gap:8px
+}
 
 @media(max-width:800px){
-.stats{grid-template-columns:1fr 1fr}
-.grid{grid-template-columns:1fr}
-.row{grid-template-columns:1fr auto}
+
+.stats{
+grid-template-columns:1fr 1fr
+}
+
+.grid{
+grid-template-columns:1fr
+}
+
+.row{
+grid-template-columns:1fr auto
+}
+
 .row>*:nth-child(2),
-.row>*:nth-child(3){font-size:12px}
-.formgrid{grid-template-columns:1fr}
-.field.full{grid-column:auto}
+.row>*:nth-child(3){
+font-size:12px
+}
+
+.formgrid{
+grid-template-columns:1fr
+}
+
+.field.full{
+grid-column:auto
+}
+
+.share-grid{
+grid-template-columns:1fr
+}
+
 }
 
 @media(max-width:450px){
-.app{padding:12px}
-.stats{gap:8px}
-.card{padding:13px}
-.stat strong{font-size:19px}
-.top .btn{padding:9px 10px}
+
+.app{
+padding:12px
+}
+
+.stats{
+gap:8px
+}
+
+.card{
+padding:13px
+}
+
+.stat strong{
+font-size:19px
+}
+
+.top .btn{
+padding:9px 10px
+}
+
+.history-item{
+align-items:flex-start;
+flex-direction:column
+}
+
 }
 </style>
 </head>
@@ -142,15 +397,23 @@ border-radius:20px
 <main class="app">
 
 <header class="top">
+
 <div class="brand">
+
 <h1>💰 Daily Expense Manager</h1>
+
 <p>हर दिन का खर्च आसान तरीके से सेव करें</p>
+
 </div>
 
 <button class="btn primary" onclick="focusForm()">
 ＋ खर्च जोड़ें
 </button>
+
 </header>
+
+
+<!-- STATS -->
 
 <section class="stats">
 
@@ -177,11 +440,14 @@ border-radius:20px
 </section>
 
 
+<!-- GRAPH + BUDGET -->
+
 <div class="grid">
 
 <section class="card">
 
 <div class="section-title">
+
 <h2>📈 Daily Expense</h2>
 
 <div class="month">
@@ -215,10 +481,13 @@ placeholder="जैसे 10000"
 </div>
 
 <div class="budgetline">
-<div id="budgetfill"
+
+<div
+id="budgetfill"
 class="budgetfill"
 style="width:0%">
 </div>
+
 </div>
 
 <div id="budgettext" class="muted">
@@ -243,7 +512,8 @@ Budget set नहीं है
 
 <!-- ADD EXPENSE -->
 
-<section class="card"
+<section
+class="card"
 style="margin-top:14px"
 id="formCard">
 
@@ -312,8 +582,6 @@ placeholder="0"
 </div>
 
 
-<!-- PRODUCT NAME -->
-
 <div class="field full">
 
 <label>वस्तु / सामान का नाम</label>
@@ -338,7 +606,6 @@ placeholder="कोई अतिरिक्त जानकारी"
 
 </div>
 
-
 </div>
 
 
@@ -358,16 +625,77 @@ Clear
 
 <button
 class="btn ghost"
-onclick="shareSummary()">
+onclick="toggleShareBox()">
 📤 Share
 </button>
+
+<button
+class="btn ghost"
+onclick="showHistory()">
+📜 History
+</button>
+
+</div>
+
+
+<!-- SHARE DATE RANGE -->
+
+<div id="shareBox" class="share-box">
+
+<div class="section-title">
+<h2>📤 Share Expense</h2>
+</div>
+
+<div class="share-grid">
+
+<div class="field">
+
+<label>From Date</label>
+
+<input
+id="shareFrom"
+type="date"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>To Date</label>
+
+<input
+id="shareTo"
+type="date"
+>
+
+</div>
+
+</div>
+
+
+<div class="share-actions">
+
+<button
+class="btn primary"
+onclick="shareDateRange()">
+Share
+</button>
+
+<button
+class="btn ghost"
+onclick="toggleShareBox()">
+Cancel
+</button>
+
+</div>
 
 </div>
 
 </section>
 
 
-<!-- EXPENSE LIST -->
+<!-- CURRENT MONTH EXPENSES -->
 
 <section class="card expenses">
 
@@ -385,6 +713,31 @@ id="monthLabel">
 <div id="list"></div>
 
 </section>
+
+
+<!-- HISTORY -->
+
+<section
+id="historyCard"
+class="card history-card"
+style="display:none">
+
+<div class="section-title">
+
+<h2>📜 History</h2>
+
+<button
+class="btn ghost"
+onclick="hideHistory()">
+Close
+</button>
+
+</div>
+
+<div id="historyList"></div>
+
+</section>
+
 
 </main>
 
@@ -423,17 +776,24 @@ localStorage.getItem('dem_expenses') || '[]'
 );
 
 
-/* पुराने category names को नए Hindi names में बदलना */
+/* =========================
+   OLD DATA MIGRATION
+========================= */
 
 expenses=expenses.map(x=>{
 
 let old=x.cat;
 
 let converted={
+
 'नमकीन / Snacks':'नमकीन',
+
 'मोबाइल / Recharge':'मोबाइल / रिचार्ज',
+
 'बिजली / Bill':'बिजली / बिल',
+
 'Others':'अन्य'
+
 };
 
 if(converted[old]){
@@ -454,11 +814,49 @@ JSON.stringify(expenses)
    DATE
 ========================= */
 
-const todayISO=()=>
-new Date().toISOString().slice(0,10);
+const todayISO=()=>{
+
+let d=new Date();
+
+let year=d.getFullYear();
+
+let month=String(
+d.getMonth()+1
+).padStart(2,'0');
+
+let day=String(
+d.getDate()
+).padStart(2,'0');
+
+return `${year}-${month}-${day}`;
+
+};
+
 
 const monthISO=()=>
 todayISO().slice(0,7);
+
+
+/* =========================
+   FORMAT DATE
+========================= */
+
+function formatDate(date){
+
+if(!date) return '';
+
+return new Date(
+date+'T00:00:00'
+).toLocaleDateString(
+'hi-IN',
+{
+day:'2-digit',
+month:'2-digit',
+year:'numeric'
+}
+);
+
+}
 
 
 /* =========================
@@ -477,10 +875,15 @@ document.getElementById('budget').value=
 localStorage.getItem('dem_budget') || '';
 
 document.getElementById('month')
-.addEventListener('change',render);
+.addEventListener(
+'change',
+render
+);
 
 document.getElementById('budget')
-.addEventListener('input',()=>{
+.addEventListener(
+'input',
+()=>{
 
 localStorage.setItem(
 'dem_budget',
@@ -506,7 +909,9 @@ let cat=
 document.getElementById('category').value;
 
 let amt=
-Number(document.getElementById('amount').value);
+Number(
+document.getElementById('amount').value
+);
 
 let date=
 document.getElementById('date').value;
@@ -519,7 +924,8 @@ let note=
 document.getElementById('note')
 .value.trim();
 
-if(!amt || amt<0 || !date){
+
+if(!amt || amt<=0 || !date){
 
 alert(
 'Category, Amount और Date भरें।'
@@ -530,24 +936,31 @@ return;
 }
 
 
-/* अगर product name खाली है */
+/* OTHER CATEGORY */
 
-if(!product){
-
-product=cat;
-
-}
-
-
-/* अगर category अन्य है */
-
-if(cat==='अन्य' && !product){
+if(
+cat==='अन्य' &&
+!product
+){
 
 alert(
 'अन्य category में वस्तु / सामान का नाम लिखें।'
 );
 
+document.getElementById(
+'productName'
+).focus();
+
 return;
+
+}
+
+
+/* OTHER CATEGORIES */
+
+if(!product){
+
+product=cat;
 
 }
 
@@ -581,6 +994,8 @@ resetForm();
 
 render();
 
+alert('Expense saved successfully!');
+
 }
 
 
@@ -590,8 +1005,20 @@ render();
 
 function del(id){
 
+if(
+!confirm(
+'क्या आप यह expense delete करना चाहते हैं?'
+)
+){
+
+return;
+
+}
+
 expenses=
-expenses.filter(x=>x.id!==id);
+expenses.filter(
+x=>x.id!==id
+);
 
 localStorage.setItem(
 'dem_expenses',
@@ -599,6 +1026,16 @@ JSON.stringify(expenses)
 );
 
 render();
+
+if(
+document.getElementById(
+'historyCard'
+).style.display!=='none'
+){
+
+renderHistory();
+
+}
 
 }
 
@@ -635,13 +1072,16 @@ document
 behavior:'smooth'
 });
 
-setTimeout(()=>{
+setTimeout(
+()=>{
 
 document
 .getElementById('amount')
 .focus();
 
-},350);
+},
+350
+);
 
 }
 
@@ -671,8 +1111,8 @@ document.getElementById('month').value
 
 
 const data=
-expenses.filter(x=>
-x.date.startsWith(m)
+expenses.filter(
+x=>x.date.startsWith(m)
 );
 
 
@@ -695,8 +1135,8 @@ x=>x.date===todayISO()
 
 const days=
 new Date(
-m.slice(0,4),
-Number(m.slice(5))-0,
+Number(m.slice(0,4)),
+Number(m.slice(5)),
 0
 ).getDate();
 
@@ -723,7 +1163,9 @@ data.length;
 
 document.getElementById('monthLabel')
 .textContent=
-new Date(m+'-01')
+new Date(
+m+'-01'
+)
 .toLocaleDateString(
 'hi-IN',
 {
@@ -733,13 +1175,22 @@ year:'numeric'
 );
 
 
-renderBars(data,days);
+renderBars(
+data,
+days
+);
 
-renderCats(data);
+renderCats(
+data
+);
 
-renderList(data);
+renderList(
+data
+);
 
-renderBudget(total);
+renderBudget(
+total
+);
 
 }
 
@@ -748,7 +1199,10 @@ renderBudget(total);
    DAILY GRAPH
 ========================= */
 
-function renderBars(data,days){
+function renderBars(
+data,
+days
+){
 
 let vals=
 Array.from(
@@ -756,7 +1210,10 @@ Array.from(
 (_,i)=>
 data
 .filter(
-x=>Number(x.date.slice(8))===i+1
+x=>
+Number(
+x.date.slice(8)
+)===i+1
 )
 .reduce(
 (s,x)=>s+x.amt,
@@ -766,13 +1223,18 @@ x=>Number(x.date.slice(8))===i+1
 
 
 let max=
-Math.max(...vals,1);
+Math.max(
+...vals,
+1
+);
 
 
-document.getElementById('bars')
-.innerHTML=
+document.getElementById(
+'bars'
+).innerHTML=
 
-vals.map((v,i)=>`
+vals.map(
+(v,i)=>`
 
 <div class="barwrap">
 
@@ -791,32 +1253,38 @@ v?3:1
 
 </div>
 
-`).join('');
+`
+).join('');
 
 }
 
 
 /* =========================
-   CATEGORY GRAPH
+   CATEGORIES
 ========================= */
 
-function renderCats(data){
+function renderCats(
+data
+){
 
 let map={};
 
 
-data.forEach(x=>{
+data.forEach(
+x=>{
 
 map[x.cat]=
 (map[x.cat]||0)+x.amt;
 
-});
+}
+);
 
 
 let arr=
 
 CATS
-.map(x=>({
+.map(
+x=>({
 
 name:x[1],
 
@@ -825,19 +1293,24 @@ icon:x[0],
 amt:
 map[x[1]]||0
 
-}))
-.filter(x=>x.amt)
+})
+)
+.filter(
+x=>x.amt
+)
 .sort(
 (a,b)=>b.amt-a.amt
 );
 
 
-document.getElementById('categories')
-.innerHTML=
+document.getElementById(
+'categories'
+).innerHTML=
 
 arr.length?
 
-arr.map(x=>`
+arr.map(
+x=>`
 
 <div class="cat">
 
@@ -855,7 +1328,8 @@ ${money(x.amt)}
 
 </div>
 
-`).join('')
+`
+).join('')
 
 :
 
@@ -868,9 +1342,13 @@ ${money(x.amt)}
    EXPENSE LIST
 ========================= */
 
-function renderList(data){
+function renderList(
+data
+){
 
-data.sort(
+let sorted=[
+...data
+].sort(
 (a,b)=>
 (b.date+b.time)
 .localeCompare(
@@ -879,12 +1357,14 @@ a.date+a.time
 );
 
 
-document.getElementById('list')
-.innerHTML=
+document.getElementById(
+'list'
+).innerHTML=
 
-data.length?
+sorted.length?
 
-data.map(x=>`
+sorted.map(
+x=>`
 
 <div class="row">
 
@@ -892,32 +1372,36 @@ data.map(x=>`
 
 <strong>
 ${escapeHtml(
-x.product || x.note || x.cat
+x.product ||
+x.note ||
+x.cat
 )}
 </strong>
 
 <div class="muted">
 
-${new Date(
-x.date+'T00:00'
-).toLocaleDateString('hi-IN')}
+📅 ${formatDate(x.date)}
 
-${x.time||''}
+${x.time?
+' • '+x.time:
+''}
 
 </div>
 
 ${x.note?
 `<div class="muted">
 ${escapeHtml(x.note)}
-</div>`:''
-}
+</div>`:
+''}
 
 </div>
 
 
 <span class="pill">
 
-${escapeHtml(x.cat)}
+${escapeHtml(
+x.cat
+)}
 
 </span>
 
@@ -939,7 +1423,8 @@ Delete
 
 </div>
 
-`).join('')
+`
+).join('')
 
 :
 
@@ -952,12 +1437,15 @@ Delete
    BUDGET
 ========================= */
 
-function renderBudget(total){
+function renderBudget(
+total
+){
 
 let b=
 Number(
-document.getElementById('budget')
-.value||0
+document.getElementById(
+'budget'
+).value||0
 );
 
 
@@ -969,12 +1457,16 @@ total/b*100,
 ):0;
 
 
-document.getElementById('budgetfill')
+document.getElementById(
+'budgetfill'
+)
 .style.width=
 pct+'%';
 
 
-document.getElementById('budgettext')
+document.getElementById(
+'budgettext'
+)
 .textContent=
 
 b?
@@ -989,26 +1481,66 @@ b?
 
 
 /* =========================
-   SHARE SUMMARY
+   SHARE BOX
 ========================= */
 
-function shareSummary(){
+function toggleShareBox(){
 
-const m=
-document.getElementById('month').value
-||monthISO();
+let box=
+document.getElementById(
+'shareBox'
+);
 
-
-const data=
-expenses.filter(
-x=>x.date.startsWith(m)
+box.classList.toggle(
+'show'
 );
 
 
-if(!data.length){
+if(
+box.classList.contains('show')
+){
+
+document.getElementById(
+'shareFrom'
+).value=
+todayISO();
+
+document.getElementById(
+'shareTo'
+).value=
+todayISO();
+
+box.scrollIntoView({
+behavior:'smooth',
+block:'nearest'
+});
+
+}
+
+}
+
+
+/* =========================
+   SHARE DATE RANGE
+========================= */
+
+function shareDateRange(){
+
+let from=
+document.getElementById(
+'shareFrom'
+).value;
+
+let to=
+document.getElementById(
+'shareTo'
+).value;
+
+
+if(!from || !to){
 
 alert(
-'इस महीने share करने के लिए कोई expense नहीं है।'
+'From Date और To Date चुनें।'
 );
 
 return;
@@ -1016,7 +1548,45 @@ return;
 }
 
 
-const total=
+if(from>to){
+
+alert(
+'From Date, To Date से पहले होनी चाहिए।'
+);
+
+return;
+
+}
+
+
+let data=
+expenses
+.filter(
+x=>
+x.date>=from &&
+x.date<=to
+)
+.sort(
+(a,b)=>
+(a.date+a.time)
+.localeCompare(
+b.date+b.time
+)
+);
+
+
+if(!data.length){
+
+alert(
+'इस date range में कोई expense नहीं है।'
+);
+
+return;
+
+}
+
+
+let total=
 data.reduce(
 (s,x)=>s+x.amt,
 0
@@ -1027,27 +1597,52 @@ let text=
 `📊 Daily Expense Manager\n\n`;
 
 text+=
-`Month: ${new Date(m+'-01')
-.toLocaleDateString(
-'hi-IN',
-{
-month:'long',
-year:'numeric'
-}
-)}\n\n`;
+`📅 ${formatDate(from)} से ${formatDate(to)} तक\n\n`;
 
 
-data.forEach(x=>{
+/* DATE WISE SHARE */
+
+let currentDate='';
+
+data.forEach(
+x=>{
+
+if(
+x.date!==currentDate
+){
+
+currentDate=x.date;
 
 text+=
-`• ${x.product || x.note || x.cat} — ${money(x.amt)}\n`;
+`📅 ${formatDate(x.date)}\n`;
 
-});
+}
+
+text+=
+`• ${x.product || x.note || x.cat}`;
+
+text+=
+` — ${money(x.amt)}`;
+
+if(x.time){
+
+text+=
+` (${x.time})`;
+
+}
+
+text+=
+`\n`;
+
+}
+);
 
 
 text+=
 `\n💰 Total Expense: ${money(total)}`;
 
+
+/* SHARE */
 
 if(
 navigator.share
@@ -1055,25 +1650,231 @@ navigator.share
 
 navigator.share({
 
-title:'Expense Summary',
+title:
+'Expense Summary',
 
 text:text
 
-}).catch(()=>{});
+}).catch(
+()=>{}
+);
 
 }else{
 
+if(
+navigator.clipboard
+){
+
 navigator.clipboard
 .writeText(text)
-.then(()=>{
+.then(
+()=>{
 
 alert(
 'Expense summary copied. अब WhatsApp या किसी भी app में paste कर सकते हैं।'
 );
 
-});
+}
+);
+
+}else{
+
+alert(text);
 
 }
+
+}
+
+}
+
+
+/* =========================
+   HISTORY
+========================= */
+
+function showHistory(){
+
+let card=
+document.getElementById(
+'historyCard'
+);
+
+card.style.display=
+'block';
+
+renderHistory();
+
+setTimeout(
+()=>{
+
+card.scrollIntoView({
+behavior:'smooth'
+});
+
+},
+100
+);
+
+}
+
+
+function hideHistory(){
+
+document.getElementById(
+'historyCard'
+).style.display=
+'none';
+
+}
+
+
+/* =========================
+   HISTORY LIST
+========================= */
+
+function renderHistory(){
+
+let list=
+document.getElementById(
+'historyList'
+);
+
+
+let data=[
+...expenses
+].sort(
+(a,b)=>
+(b.date+b.time)
+.localeCompare(
+a.date+a.time
+)
+);
+
+
+if(!data.length){
+
+list.innerHTML=
+'<div class="empty">अभी कोई history नहीं है।</div>';
+
+return;
+
+}
+
+
+/* DATE GROUP */
+
+let groups={};
+
+
+data.forEach(
+x=>{
+
+if(!groups[x.date]){
+
+groups[x.date]=[];
+
+}
+
+groups[x.date].push(x);
+
+}
+);
+
+
+let dates=
+Object.keys(groups)
+.sort()
+.reverse();
+
+
+list.innerHTML=
+dates.map(
+date=>{
+
+let items=
+groups[date];
+
+let dayTotal=
+items.reduce(
+(s,x)=>s+x.amt,
+0
+);
+
+
+return `
+
+<div class="history-date">
+
+📅 ${formatDate(date)}
+
+<span class="muted">
+— Total ${money(dayTotal)}
+</span>
+
+</div>
+
+
+${items.map(
+x=>`
+
+<div class="history-item">
+
+<div class="history-left">
+
+<strong>
+${escapeHtml(
+x.product ||
+x.note ||
+x.cat
+)}
+</strong>
+
+<span class="muted">
+
+${escapeHtml(
+x.cat
+)}
+
+${x.time?
+' • '+x.time:
+''}
+
+</span>
+
+${x.note?
+`<span class="muted">
+${escapeHtml(x.note)}
+</span>`:
+''}
+
+</div>
+
+
+<div class="history-right">
+
+<strong>
+${money(x.amt)}
+</strong>
+
+<button
+class="delete"
+onclick="del(${x.id})">
+
+Delete
+
+</button>
+
+</div>
+
+</div>
+
+`
+).join('')}
+
+`;
+
+}
+).join('');
 
 }
 
@@ -1084,27 +1885,30 @@ alert(
 
 function escapeHtml(s){
 
-return String(s||'')
+return String(
+s||''
+)
 .replace(
 /[&<>'"]/g,
 c=>
 ({
+
 '&':'&amp;',
 '<':'&lt;',
 '>':'&gt;',
 "'":'&#39;',
 '"':'&quot;'
+
 }[c])
 );
 
 }
 
 
-/* START */
+/* =========================
+   START
+========================= */
 
 init();
 
-</script>
-
-</body>
-</html>
+</scri
