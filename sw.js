@@ -1,4 +1,4 @@
-const CACHE_NAME = "daily-expense-manager-v4";
+const CACHE_NAME = "daily-expense-manager-v5";
 
 const FILES_TO_CACHE = [
   "./",
