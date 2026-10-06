@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#16a34a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<title>Daily Expense Manager</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#f1f5f9;color:#0f172a}
+.app{max-width:680px;margin:auto;min-height:100vh;background:#f8fafc;padding-bottom:90px}
+header{background:#0f172a;color:white;padding:22px 18px 26px;border-radius:0 0 24px 24px}
+header h1{margin:0;font-size:24px}header p{margin:6px 0 0;color:#cbd5e1;font-size:13px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px}.card{background:white;border-radius:16px;padding:14px;box-shadow:0 3px 15px #0f172a12}.label{font-size:12px;color:#64748b}.value{font-size:22px;font-weight:800;margin-top:4px}
+.tabs{display:flex;gap:8px;padding:0 14px 12px}.tab{flex:1;border:0;background:#e2e8f0;padding:11px;border-radius:12px;font-weight:700}.tab.active{background:#16a34a;color:white}
+section{padding:0 14px}.panel{background:white;border-radius:18px;padding:15px;margin-bottom:12px;box-shadow:0 3px 15px #0f172a0c}
+button,input,select{font:inherit}button{cursor:pointer}.primary{width:100%;border:0;background:#16a34a;color:white;padding:13px;border-radius:13px;font-weight:800}
+.row{display:flex;gap:8px}.row>*{flex:1}input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:11px;background:white}
+h2{font-size:17px;margin:0 0 12px}.expense{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #e2e8f0}.expense:last-child{border-bottom:0}.small{font-size:12px;color:#64748b}.amt{font-weight:800}.del{border:0;background:#fee2e2;color:#b91c1c;border-radius:9px;padding:6px 9px}
+canvas{width:100%;height:220px;border-radius:12px;background:#f8fafc}.empty{text-align:center;color:#64748b;padding:25px}
+#install{display:none;margin:0 14px 12px;padding:12px;border-radius:13px;background:#dcfce7;color:#166534;font-weight:700;border:1px solid #86efac}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(680px,100%);background:white;border-top:1px solid #e2e8f0;display:flex;padding:10px 14px;gap:8px;z-index:5}.navbtn{flex:1;border:0;background:white;padding:9px;border-radius:11px}.navbtn.active{background:#dcfce7;color:#166534;font-weight:800}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:end;z-index:10}.sheet{background:white;width:100%;max-width:680px;margin:auto;border-radius:22px 22px 0 0;padding:20px}.sheet h2{font-size:20px}
+@media(min-width:681px){.app{box-shadow:0 0 35px #0f172a15}nav{bottom:12px;border:1px solid #e2e8f0;border-radius:18px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><h1>💰 Daily Expense Manager</h1><p>Simple • Private • Offline</p></header>
+<div class="cards">
+<div class="card"><div class="label">Today</div><div class="value" id="today">₹0</div></div>
+<div class="card"><div class="label">This Month</div><div class="value" id="month">₹0</div></div>
+</div>
+<div id="install">📲 Install this app on your phone <button id="installBtn" style="float:right;border:0;background:#16a34a;color:white;border-radius:8px;padding:6px 10px">Install</button></div>
+<div class="tabs"><button class="tab active" data-tab="home">Home</button><button class="tab" data-tab="stats">Graphs</button><button class="tab" data-tab="history">History</button></div>
+
+<div id="home" class="tabpage">
+<section><button class="primary" onclick="openModal()">＋ Add Expense</button></section>
+<section style="margin-top:12px"><div class="panel"><h2>Recent expenses</h2><div id="recent"></div></div></section>
+</div>
+
+<div id="stats" class="tabpage" style="display:none">
+<section>
+<div class="panel"><div class="row"><select id="monthPicker"></select></div></div>
+<div class="panel"><h2>Daily spending</h2><canvas id="dailyChart" width="640" height="220"></canvas></div>
+<div class="panel"><h2>Category spending</h2><canvas id="catChart" width="640" height="220"></canvas></div>
+</section>
+</div>
+
+<div id="history" class="tabpage" style="display:none">
+<section><div class="panel"><h2>All expenses</h2><div id="all"></div></div></section>
+</div>
+
+<nav><button class="navbtn active" data-tab="home">🏠 Home</button><button class="navbtn" data-tab="stats">📊 Graphs</button><button class="navbtn" data-tab="history">🧾 History</button></nav>
+</div>
+
+<div class="modal" id="modal"><div class="sheet">
+<h2>Add Expense</h2>
+<div style="margin-bottom:10px"><select id="cat">
+<option>Milk</option><option>Vegetables</option><option>Namkeen / Snacks</option><option>Fruits</option><option>Grocery</option><option>Travel</option><option>Mobile / Recharge</option><option>Medicine</option><option>Outside Food</option><option>Electricity / Bills</option><option>Home</option><option>Others</option>
+</select></div>
+<div id="otherWrap" style="display:none;margin-bottom:10px"><input id="other" placeholder="Expense name"></div>
+<div class="row" style="margin-bottom:10px"><input id="amount" type="number" min="0" step="0.01" placeholder="Amount ₹"><input id="date" type="date"></div>
+<input id="note" placeholder="Note (optional)" style="margin-bottom:12px">
+<div class="row"><button class="primary" onclick="saveExpense()">Save</button><button class="primary" style="background:#e2e8f0;color:#0f172a" onclick="closeModal()">Cancel</button></div>
+</div></div>
+
+<script>
+const KEY="expense_manager_data_v1";
+let expenses=JSON.parse(localStorage.getItem(KEY)||"[]");
+let deferredPrompt=null;
+const fmt=n=>"₹"+Number(n).toLocaleString("en-IN",{maximumFractionDigits:2});
+const todayStr=()=>new Date().toISOString().slice(0,10);
+document.getElementById("date").value=todayStr();
+
+function save(){localStorage.setItem(KEY,JSON.stringify(expenses))}
+function openModal(){document.getElementById("modal").style.display="flex";document.getElementById("date").value=todayStr()}
+function closeModal(){document.getElementById("modal").style.display="none"}
+document.getElementById("cat").onchange=e=>document.getElementById("otherWrap").style.display=e.target.value==="Others"?"block":"none";
+function saveExpense(){
+ let amount=Number(document.getElementById("amount").value); if(!amount||amount<0)return alert("Amount enter karo");
+ let cat=document.getElementById("cat").value==="Others"?(document.getElementById("other").value.trim()||"Others"):document.getElementById("cat").value;
+ expenses.push({id:Date.now(),amount,cat,date:document.getElementById("date").value,note:document.getElementById("note").value.trim()});
+ save();document.getElementById("amount").value="";document.getElementById("note").value="";document.getElementById("other").value="";closeModal();render();
+}
+function remove(id){if(confirm("Delete this expense?")){expenses=expenses.filter(x=>x.id!==id);save();render()}}
+function monthKey(d){return d.slice(0,7)}
+function sum(arr){return arr.reduce((s,x)=>s+x.amount,0)}
+function render(){
+ const now=todayStr(), mk=monthKey(now);
+ document.getElementById("today").textContent=fmt(sum(expenses.filter(x=>x.date===now)));
+ document.getElementById("month").textContent=fmt(sum(expenses.filter(x=>monthKey(x.date)===mk)));
+ const sorted=[...expenses].sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id);
+ document.getElementById("recent").innerHTML=sorted.slice(0,8).map(item).join("")||'<div class="empty">No expenses yet.</div>';
+ document.getElementById("all").innerHTML=sorted.map(item).join("")||'<div class="empty">No expenses yet.</div>';
+ fillMonths(); drawCharts();
+}
+function item(x){return `<div class="expense"><div><b>${esc(x.cat)}</b><div class="small">${x.date}${x.note?" • "+esc(x.note):""}</div></div><div style="display:flex;gap:8px;align-items:center"><span class="amt">${fmt(x.amount)}</span><button class="del" onclick="remove(${x.id})">×</button></div></div>`}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+function fillMonths(){
+ let sel=document.getElementById("monthPicker"), old=sel.value;
+ let ms=[...new Set(expenses.map(x=>monthKey(x.date)))]; let cur=monthKey(todayStr()); if(!ms.includes(cur))ms.push(cur); ms.sort().reverse();
+ sel.innerHTML=ms.map(m=>`<option value="${m}">${new Date(m+"-01").toLocaleDateString("en-IN",{month:"long",year:"numeric"})}</option>`).join("");
+ sel.value=ms.includes(old)?old:cur; sel.onchange=drawCharts;
+}
+function drawCharts(){
+ let m=document.getElementById("monthPicker").value||monthKey(todayStr()), arr=expenses.filter(x=>monthKey(x.date)===m);
+ lineChart(document.getElementById("dailyChart"),arr); barChart(document.getElementById("catChart"),arr);
+}
+function ctx(c){return c.getContext("2d")}
+function lineChart(c,arr){
+ let g=ctx(c),w=c.width,h=c.height;g.clearRect(0,0,w,h);let days=new Date(+mYear(m),+mMonth(m)+1,0).getDate();let vals=Array(days).fill(0);
+ arr.forEach(x=>vals[+x.date.slice(8)-1]+=x.amount);let max=Math.max(...vals,1), pad=35;
+ g.strokeStyle="#cbd5e1";g.lineWidth=1;g.beginPath();g.moveTo(pad,10);g.lineTo(pad,h-30);g.lineTo(w-10,h-30);g.stroke();
+ g.strokeStyle="#16a34a";g.lineWidth=3;g.beginPath();vals.forEach((v,i)=>{let x=pad+i*(w-pad-15)/(days-1),y=h-30-(v/max)*(h-45);i?g.lineTo(x,y):g.moveTo(x,y)});g.stroke();
+ g.fillStyle="#64748b";g.font="11px system-ui";[0,Math.ceil(days/2)-1,days-1].forEach(i=>g.fillText(String(i+1),pad+i*(w-pad-15)/(days-1)-4,h-10));
+}
+function mYear(m){return m.slice(0,4)} function mMonth(m){return Number(m.slice(5,7))}
+function barChart(c,arr){
+ let g=ctx(c),w=c.width,h=c.height;g.clearRect(0,0,w,h);let map={};arr.forEach(x=>map[x.cat]=(map[x.cat]||0)+x.amount);let rows=Object.entries(map).sort((a,b)=>b[1]-a[1]).slice(0,8);let max=Math.max(...rows.map(x=>x[1]),1), left=145;
+ rows.forEach((r,i)=>{let y=20+i*24;g.fillStyle="#0f172a";g.font="11px system-ui";let lab=r[0].length>20?r[0].slice(0,20)+"…":r[0];g.fillText(lab,8,y+12);g.fillStyle="#16a34a";g.fillRect(left,y,w-left-12,(r[1]/max)*(w-left-30)/1.7);g.fillStyle="#334155";g.fillText(fmt(r[1]),Math.min(w-65,left+(r[1]/max)*(w-left-30)/1.7+5),y+12)});
+}
+document.querySelectorAll(".tab,.navbtn").forEach(b=>b.onclick=()=>{let t=b.dataset.tab;document.querySelectorAll(".tabpage").forEach(x=>x.style.display=x.id===t?"block":"none");document.querySelectorAll(".tab,.navbtn").forEach(x=>x.classList.toggle("active",x.dataset.tab===t));if(t==="stats")drawCharts()});
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;document.getElementById("install").style.display="block"});
+document.getElementById("installBtn").onclick=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;document.getElementById("install").style.display="none"};
+if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));
+render();
+</script>
+</body></html>
